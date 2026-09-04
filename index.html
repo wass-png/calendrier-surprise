@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Calendrier Surprise <3</title>
+  <title>Calendrier Surprise &lt;3</title>
 
   <style>
 
@@ -44,11 +44,7 @@
       margin: 20px 0;
     }
 
-    .locked {
-      line-height: 1.6;
-      font-size: 1.1em;
-    }
-
+    .locked,
     .surprise {
       line-height: 1.6;
       font-size: 1.1em;
@@ -59,12 +55,7 @@
       margin-top: 20px;
     }
 
-    img {
-      max-width: 100%;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
-
+    img,
     video {
       max-width: 100%;
       border-radius: 20px;
@@ -74,12 +65,11 @@
   </style>
 </head>
 
-
 <body>
 
   <main class="card">
 
-    <h1>Calendrier Surprise <3</h1>
+    <h1>Calendrier Surprise &lt;3</h1>
 
     <div class="symbol" id="symbol">🐚</div>
 
@@ -94,50 +84,69 @@
   ==========================================
   CALENDRIER DES SURPRISES
   ==========================================
-
-  Chaque surprise possède :
-
-  - un numéro
-  - une date
-  - un titre
-  - un contenu
-
-  Tu pourras modifier tout ça plus tard.
   */
-
 
   const surprises = {
 
     "1": {
-      date: "2026-09-15",
-      titre: "Une petite surprise <3",
+      date: "2026-09-08",
+      titre: "8 septembre <3",
       contenu: `
-        <p>Une surprise arrivera ici bientôt 💌</p>
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
-
 
     "2": {
-      date: "2026-10-10",
-      titre: "Une nouvelle surprise 🍓",
+      date: "2026-09-27",
+      titre: "27 septembre <3",
       contenu: `
-        <p>Quelque chose se prépare ici...</p>
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
-
 
     "3": {
-      date: "2026-12-25",
-      titre: "25 décembre 🪷",
+      date: "2026-10-19",
+      titre: "19 octobre 🍓",
       contenu: `
-        <p>Ta surprise sera ajoutée ici.</p>
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
-
     "4": {
-      date: "2027-02-20",
-      titre: "20 février 🐻",
+      date: "2026-10-24",
+      titre: "24 octobre 🐚",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "5": {
+      date: "2026-11-09",
+      titre: "9 novembre 🪷",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "6": {
+      date: "2026-12-25",
+      titre: "25 décembre <3",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "7": {
+      date: "2027-01-01",
+      titre: "1 janvier 🧃",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "8": {
+      date: "2027-04-25",
+      titre: "25 avril 🐻",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
@@ -151,7 +160,6 @@
   ON REGARDE QUEL QR CODE A ÉTÉ SCANNÉ
   ==========================================
   */
-
 
   const params = new URLSearchParams(window.location.search);
 
@@ -168,14 +176,13 @@
   ==========================================
   */
 
-
   if (!numero || !surprises[numero]) {
 
     symbol.textContent = "🐚";
 
     app.innerHTML = `
 
-      <h2>Bienvenue <3</h2>
+      <h2>Bienvenue &lt;3</h2>
 
       <p>
         Scanne un QR code de ton calendrier
@@ -197,7 +204,6 @@
   ==========================================
   */
 
-
   else {
 
     const surprise = surprises[numero];
@@ -210,11 +216,9 @@
 
 
     const options = {
-
       day: "numeric",
       month: "long",
       year: "numeric"
-
     };
 
 
@@ -223,7 +227,6 @@
     SURPRISE VERROUILLÉE
     ==========================================
     */
-
 
     if (maintenant < dateOuverture) {
 
@@ -264,7 +267,6 @@
     ==========================================
     */
 
-
     else {
 
       symbol.textContent = "💌";
@@ -279,7 +281,7 @@
 
           <p>
             <br>
-            <3 🐻
+            &lt;3 🐻
           </p>
 
         </div>
@@ -291,7 +293,6 @@
   }
 
 </script>
-
 
 </body>
 </html>
