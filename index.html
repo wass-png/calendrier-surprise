@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calendrier Surprise 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #e6f0ff);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 25px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2em;
+    }
+
+    .emoji {
+      font-size: 4em;
+      margin: 15px;
+    }
+
+    #content {
+      margin-top: 25px;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .locked {
+      padding: 20px;
+    }
+
+    .surprise {
+      display: none;
+      padding: 10px;
+    }
+
+    .date {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <h1>💖 Calendrier Surprise 💖</h1>
+
+    <div class="emoji" id="emoji">🔒</div>
+
+    <div id="content">
+
+      <div class="locked" id="locked">
+        <h2>Cette surprise est encore verrouillée 🔒</h2>
+
+        <p>
+          Il faudra attendre le bon jour pour découvrir
+          ce qui se cache ici... ✨
+        </p>
+
+        <p class="date" id="dateMessage"></p>
+      </div>
+
+
+      <div class="surprise" id="surprise">
+
+        <h2>🎉 Surprise ! 🎉</h2>
+
+        <!--
+        ✏️ TU POURRAS AJOUTER TA SURPRISE ICI PLUS TARD
+
+        Exemples :
+
+        <p>Mon petit message 💖</p>
+
+        <img src="photo.jpg" width="100%">
+
+        <video controls width="100%">
+          <source src="video.mp4">
+        </video>
+
+        -->
+
+        <p>
+          💖 Ta surprise sera bientôt ajoutée ici 💖
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+<script>
+
+  /*
+  ==========================================
+  📅 MODIFIE ICI LA DATE DE LA SURPRISE
+  ==========================================
+
+  Format :
+
+  année-mois-jour
+
+  Exemple :
+
+  20 février 2027
+
+  "2027-02-20"
+
+  */
+
+  const dateOuverture = new Date("2027-02-20T00:00:00");
+
+
+  /*
+  ==========================================
+  🔒 SYSTÈME DE VERROUILLAGE
+  ==========================================
+  */
+
+  const maintenant = new Date();
+
+  const locked = document.getElementById("locked");
+  const surprise = document.getElementById("surprise");
+  const emoji = document.getElementById("emoji");
+  const dateMessage = document.getElementById("dateMessage");
+
+
+  const options = {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  };
+
+
+  if (maintenant >= dateOuverture) {
+
+    locked.style.display = "none";
+
+    surprise.style.display = "block";
+
+    emoji.textContent = "🎁";
+
+  } else {
+
+    dateMessage.textContent =
+      "🔒 Disponible le " +
+      dateOuverture.toLocaleDateString("fr-FR", options);
+
+  }
+
+</script>
+
+</body>
+</html>
