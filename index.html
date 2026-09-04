@@ -35,7 +35,6 @@
 
     h1 {
       margin-top: 0;
-      font-size: 2em;
     }
 
     .emoji {
@@ -43,24 +42,25 @@
       margin: 15px;
     }
 
-    #content {
-      margin-top: 25px;
-      font-size: 1.1em;
-      line-height: 1.6;
-    }
-
     .locked {
-      padding: 20px;
+      display: none;
     }
 
     .surprise {
       display: none;
-      padding: 10px;
+      line-height: 1.6;
+      font-size: 1.1em;
     }
 
     .date {
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.1em;
+    }
+
+    img, video {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -71,48 +71,9 @@
 
     <h1>💖 Calendrier Surprise 💖</h1>
 
-    <div class="emoji" id="emoji">🔒</div>
+    <div class="emoji" id="emoji">✨</div>
 
-    <div id="content">
-
-      <div class="locked" id="locked">
-        <h2>Cette surprise est encore verrouillée 🔒</h2>
-
-        <p>
-          Il faudra attendre le bon jour pour découvrir
-          ce qui se cache ici... ✨
-        </p>
-
-        <p class="date" id="dateMessage"></p>
-      </div>
-
-
-      <div class="surprise" id="surprise">
-
-        <h2>🎉 Surprise ! 🎉</h2>
-
-        <!--
-        ✏️ TU POURRAS AJOUTER TA SURPRISE ICI PLUS TARD
-
-        Exemples :
-
-        <p>Mon petit message 💖</p>
-
-        <img src="photo.jpg" width="100%">
-
-        <video controls width="100%">
-          <source src="video.mp4">
-        </video>
-
-        -->
-
-        <p>
-          💖 Ta surprise sera bientôt ajoutée ici 💖
-        </p>
-
-      </div>
-
-    </div>
+    <div id="app"></div>
 
   </main>
 
@@ -120,59 +81,170 @@
 <script>
 
   /*
-  ==========================================
-  📅 MODIFIE ICI LA DATE DE LA SURPRISE
-  ==========================================
+  ==================================================
+  💖 TES SURPRISES
+  ==================================================
 
-  Format :
+  Tu pourras ajouter les dates et les contenus ici.
 
-  année-mois-jour
+  IMPORTANT :
+  Chaque surprise possède un numéro.
 
   Exemple :
+  surprise=1
+  surprise=2
+  surprise=3
 
-  20 février 2027
-
-  "2027-02-20"
-
+  La date doit être écrite :
+  AAAA-MM-JJ
+  ==================================================
   */
 
-  const dateOuverture = new Date("2027-02-20T00:00:00");
+  const surprises = {
 
+    "1": {
+      date: "2026-09-15",
+      titre: "Une petite surprise 💖",
+      contenu: `
+        <p>✨ Ta surprise sera ajoutée ici plus tard ! ✨</p>
+      `
+    },
 
-  /*
-  ==========================================
-  🔒 SYSTÈME DE VERROUILLAGE
-  ==========================================
-  */
+    "2": {
+      date: "2026-10-10",
+      titre: "Une nouvelle surprise 🎁",
+      contenu: `
+        <p>💌 Une surprise t'attend ici...</p>
+      `
+    },
 
-  const maintenant = new Date();
+    "3": {
+      date: "2026-12-25",
+      titre: "Joyeux Noël ! 🎄",
+      contenu: `
+        <p>🎄 Joyeux Noël !! 💖</p>
+        <p>Ta surprise sera ajoutée ici !</p>
+      `
+    },
 
-  const locked = document.getElementById("locked");
-  const surprise = document.getElementById("surprise");
-  const emoji = document.getElementById("emoji");
-  const dateMessage = document.getElementById("dateMessage");
+    "4": {
+      date: "2027-02-20",
+      titre: "Surprise du 20 février 💕",
+      contenu: `
+        <p>💖 Cette surprise sera prête pour toi !</p>
+      `
+    }
 
-
-  const options = {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
   };
 
 
-  if (maintenant >= dateOuverture) {
+  /*
+  ==================================================
+  🔍 ON REGARDE QUEL QR CODE A ÉTÉ SCANNÉ
+  ==================================================
+  */
 
-    locked.style.display = "none";
+  const params = new URLSearchParams(window.location.search);
 
-    surprise.style.display = "block";
+  const numero = params.get("surprise");
 
-    emoji.textContent = "🎁";
+  const app = document.getElementById("app");
+
+  const emoji = document.getElementById("emoji");
+
+
+  /*
+  ==================================================
+  ❌ SI LE LIEN N'EST PAS VALIDE
+  ==================================================
+  */
+
+  if (!numero || !surprises[numero]) {
+
+    emoji.textContent = "📅";
+
+    app.innerHTML = `
+      <h2>Bienvenue ! 💖</h2>
+
+      <p>
+        Scanne un QR code de ton calendrier
+        pour découvrir une surprise ✨
+      </p>
+    `;
 
   } else {
 
-    dateMessage.textContent =
-      "🔒 Disponible le " +
-      dateOuverture.toLocaleDateString("fr-FR", options);
+    const surprise = surprises[numero];
+
+    /*
+    On crée la date d'ouverture.
+    */
+
+    const dateOuverture = new Date(
+      surprise.date + "T00:00:00"
+    );
+
+    const maintenant = new Date();
+
+
+    const options = {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    };
+
+
+    /*
+    ==================================================
+    🔒 SURPRISE ENCORE VERROUILLÉE
+    ==================================================
+    */
+
+    if (maintenant < dateOuverture) {
+
+      emoji.textContent = "🔒";
+
+      app.innerHTML = `
+        <div class="locked">
+
+          <h2>Cette surprise est encore verrouillée 🔒</h2>
+
+          <p>
+            Il faudra attendre encore un peu... ✨
+          </p>
+
+          <p class="date">
+            💖 Disponible le
+            ${dateOuverture.toLocaleDateString("fr-FR", options)}
+          </p>
+
+        </div>
+      `;
+
+    }
+
+
+    /*
+    ==================================================
+    🎉 SURPRISE DÉVERROUILLÉE
+    ==================================================
+    */
+
+    else {
+
+      emoji.textContent = "🎁";
+
+      app.innerHTML = `
+        <div class="surprise">
+
+          <h2>${surprise.titre}</h2>
+
+          ${surprise.contenu}
+
+        </div>
+      `;
+
+    }
 
   }
 
