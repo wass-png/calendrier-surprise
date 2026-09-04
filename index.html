@@ -7,7 +7,6 @@
   <title>Calendrier Surprise &lt;3</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -61,7 +60,6 @@
       border-radius: 20px;
       margin-top: 20px;
     }
-
   </style>
 </head>
 
@@ -80,63 +78,41 @@
 
 <script>
 
-  /*
-  ==========================================
-  CALENDRIER DES SURPRISES
-  ==========================================
-  */
-
   const surprises = {
 
     "1": {
       date: "2026-09-08",
-      titre: "8 septembre <3",
+      titre: "8 septembre &lt;3",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
     "2": {
-      date: "2026-09-27",
-      titre: "27 septembre <3",
+      date: "2026-10-03",
+      titre: "3 octobre 🍓",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
     "3": {
-      date: "2026-10-19",
-      titre: "19 octobre 🍓",
+      date: "2026-11-28",
+      titre: "28 novembre 🐚",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
     "4": {
-      date: "2026-10-24",
-      titre: "24 octobre 🐚",
+      date: "2026-12-25",
+      titre: "25 décembre 🪷",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
     "5": {
-      date: "2026-11-09",
-      titre: "9 novembre 🪷",
-      contenu: `
-        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
-      `
-    },
-
-    "6": {
-      date: "2026-12-25",
-      titre: "25 décembre <3",
-      contenu: `
-        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
-      `
-    },
-
-    "7": {
       date: "2027-01-01",
       titre: "1 janvier 🧃",
       contenu: `
@@ -144,9 +120,57 @@
       `
     },
 
+    "6": {
+      date: "2027-02-26",
+      titre: "26 février 🙊",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "7": {
+      date: "2027-03-04",
+      titre: "4 mars 🍓",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
     "8": {
-      date: "2027-04-25",
-      titre: "25 avril 🐻",
+      date: "2027-04-17",
+      titre: "17 avril 🪷",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "9": {
+      date: "2027-05-12",
+      titre: "12 mai 🐻",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "10": {
+      date: "2027-06-29",
+      titre: "29 juin 🧃",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "11": {
+      date: "2027-07-08",
+      titre: "8 juillet 🐚",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+    "12": {
+      date: "2027-08-13",
+      titre: "13 août 🍓",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
@@ -154,12 +178,6 @@
 
   };
 
-
-  /*
-  ==========================================
-  ON REGARDE QUEL QR CODE A ÉTÉ SCANNÉ
-  ==========================================
-  */
 
   const params = new URLSearchParams(window.location.search);
 
@@ -170,18 +188,11 @@
   const symbol = document.getElementById("symbol");
 
 
-  /*
-  ==========================================
-  PAGE D'ACCUEIL
-  ==========================================
-  */
-
   if (!numero || !surprises[numero]) {
 
     symbol.textContent = "🐚";
 
     app.innerHTML = `
-
       <h2>Bienvenue &lt;3</h2>
 
       <p>
@@ -192,19 +203,9 @@
       <p>
         🙊 🧃 🍓 🐚 🪷 🐻
       </p>
-
     `;
 
-  }
-
-
-  /*
-  ==========================================
-  PAGE D'UNE SURPRISE
-  ==========================================
-  */
-
-  else {
+  } else {
 
     const surprise = surprises[numero];
 
@@ -214,7 +215,6 @@
 
     const maintenant = new Date();
 
-
     const options = {
       day: "numeric",
       month: "long",
@@ -222,18 +222,11 @@
     };
 
 
-    /*
-    ==========================================
-    SURPRISE VERROUILLÉE
-    ==========================================
-    */
-
     if (maintenant < dateOuverture) {
 
       symbol.textContent = "🙊";
 
       app.innerHTML = `
-
         <div class="locked">
 
           <h2>Pas encore 🙊</h2>
@@ -244,10 +237,8 @@
           </p>
 
           <p class="date">
-
             Disponible le
             ${dateOuverture.toLocaleDateString("fr-FR", options)}
-
           </p>
 
           <p>
@@ -255,24 +246,13 @@
           </p>
 
         </div>
-
       `;
 
-    }
-
-
-    /*
-    ==========================================
-    SURPRISE DÉVERROUILLÉE
-    ==========================================
-    */
-
-    else {
+    } else {
 
       symbol.textContent = "💌";
 
       app.innerHTML = `
-
         <div class="surprise">
 
           <h2>${surprise.titre}</h2>
@@ -285,7 +265,6 @@
           </p>
 
         </div>
-
       `;
 
     }
