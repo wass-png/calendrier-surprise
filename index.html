@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <title>Calendrier Surprise &lt;3</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -60,8 +62,10 @@
       border-radius: 20px;
       margin-top: 20px;
     }
+
   </style>
 </head>
+
 
 <body>
 
@@ -82,11 +86,13 @@
 
     "1": {
       date: "2026-09-08",
-      titre: "8 septembre &lt;3",
+      titre: "8 septembre <3",
       contenu: `
-        <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+        <p>Bon anniversaire Anna 💌</p>
+        <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
       `
     },
+
 
     "2": {
       date: "2026-10-03",
@@ -96,6 +102,7 @@
       `
     },
 
+
     "3": {
       date: "2026-11-28",
       titre: "28 novembre 🐚",
@@ -103,6 +110,7 @@
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
+
 
     "4": {
       date: "2026-12-25",
@@ -112,6 +120,7 @@
       `
     },
 
+
     "5": {
       date: "2027-01-01",
       titre: "1 janvier 🧃",
@@ -119,6 +128,7 @@
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
+
 
     "6": {
       date: "2027-02-26",
@@ -128,6 +138,7 @@
       `
     },
 
+
     "7": {
       date: "2027-03-04",
       titre: "4 mars 🍓",
@@ -135,6 +146,7 @@
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
+
 
     "8": {
       date: "2027-04-17",
@@ -144,6 +156,7 @@
       `
     },
 
+
     "9": {
       date: "2027-05-12",
       titre: "12 mai 🐻",
@@ -151,6 +164,7 @@
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
+
 
     "10": {
       date: "2027-06-29",
@@ -160,6 +174,7 @@
       `
     },
 
+
     "11": {
       date: "2027-07-08",
       titre: "8 juillet 🐚",
@@ -168,11 +183,30 @@
       `
     },
 
+
     "12": {
       date: "2027-08-13",
       titre: "13 août 🍓",
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
+      `
+    },
+
+
+    "13": {
+      date: "2026-10-02",
+      titre: "2 octobre 💌",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+      `
+    },
+
+
+    "14": {
+      date: "2027-04-10",
+      titre: "10 avril 🍓",
+      contenu: `
+        <p>Ta surprise sera ajoutée ici plus tard 🪷</p>
       `
     }
 
@@ -193,6 +227,7 @@
     symbol.textContent = "🐚";
 
     app.innerHTML = `
+
       <h2>Bienvenue &lt;3</h2>
 
       <p>
@@ -203,9 +238,13 @@
       <p>
         🙊 🧃 🍓 🐚 🪷 🐻
       </p>
+
     `;
 
-  } else {
+  }
+
+
+  else {
 
     const surprise = surprises[numero];
 
@@ -214,6 +253,7 @@
     );
 
     const maintenant = new Date();
+
 
     const options = {
       day: "numeric",
@@ -227,6 +267,7 @@
       symbol.textContent = "🙊";
 
       app.innerHTML = `
+
         <div class="locked">
 
           <h2>Pas encore 🙊</h2>
@@ -246,13 +287,18 @@
           </p>
 
         </div>
+
       `;
 
-    } else {
+    }
+
+
+    else {
 
       symbol.textContent = "💌";
 
       app.innerHTML = `
+
         <div class="surprise">
 
           <h2>${surprise.titre}</h2>
@@ -265,6 +311,7 @@
           </p>
 
         </div>
+
       `;
 
     }
