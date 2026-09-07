@@ -136,16 +136,8 @@
 
 <script>
 
-  /* =========================================
-     CODE SECRET DU MOT
-     ========================================= */
-
   const codeSecret = "8273";
 
-
-  /* =========================================
-     LES SURPRISES
-     ========================================= */
 
   const surprises = {
 
@@ -154,7 +146,6 @@
       titre: "Joyeux anniversaire Anna &lt;3",
 
       contenu: `
-
         <div class="lettre">
 
           <p><strong>Ma chère Anna,</strong></p>
@@ -214,11 +205,8 @@
           <br>
 
           <p>Merci pour tous les rires,</p>
-
           <p>Merci pour tous les pleurs,</p>
-
           <p>Merci pour les angoisses,</p>
-
           <p>Merci pour les joies.</p>
 
           <br>
@@ -316,20 +304,12 @@
   };
 
 
-  /* =========================================
-     RECUPERATION DU QR CODE
-     ========================================= */
-
   const params = new URLSearchParams(window.location.search);
   const numero = params.get("surprise");
 
   const app = document.getElementById("app");
   const symbol = document.getElementById("symbol");
 
-
-  /* =========================================
-     PAGE D'ACCUEIL
-     ========================================= */
 
   if (!numero || !surprises[numero]) {
 
@@ -344,14 +324,7 @@
       </p>
     `;
 
-  }
-
-
-  /* =========================================
-     SURPRISE
-     ========================================= */
-
-  else {
+  } else {
 
     const surprise = surprises[numero];
 
@@ -361,8 +334,6 @@
 
     const maintenant = new Date();
 
-
-    /* AVANT LA DATE */
 
     if (maintenant < dateOuverture) {
 
@@ -391,16 +362,12 @@
     }
 
 
-    /* SURPRISE DU 8 SEPTEMBRE */
-
     else if (numero === "1") {
 
       afficherPageAnniversaire();
 
     }
 
-
-    /* AUTRES SURPRISES */
 
     else {
 
@@ -423,10 +390,6 @@
   }
 
 
-  /* =========================================
-     PAGE ANNIVERSAIRE
-     ========================================= */
-
   function afficherPageAnniversaire() {
 
     symbol.textContent = "💌";
@@ -444,9 +407,10 @@
           💌 Lire ton mot
         </button>
 
+
         <a
           class="bouton"
-          href="TON_LIEN_VIDEO"
+          href="https://drive.google.com/file/d/1RWvpjJ4u3YK63R0gQSoth3yhDvuxr8cT/view?usp=sharing"
           target="_blank"
         >
           🧃 Regarder la vidéo
@@ -458,10 +422,6 @@
 
   }
 
-
-  /* =========================================
-     DEMANDER LE CODE SECRET
-     ========================================= */
 
   function demanderCode() {
 
@@ -494,22 +454,20 @@
       <p id="erreur" class="erreur"></p>
 
       <div class="retour">
+
         <button
           class="bouton"
           onclick="afficherPageAnniversaire()"
         >
           ← Retour
         </button>
+
       </div>
 
     `;
 
   }
 
-
-  /* =========================================
-     VERIFIER LE CODE
-     ========================================= */
 
   function verifierCode() {
 
@@ -521,9 +479,7 @@
 
       afficherLettre();
 
-    }
-
-    else {
+    } else {
 
       document.getElementById("erreur").textContent =
         "Ce n'est pas le bon code 🙊";
@@ -532,10 +488,6 @@
 
   }
 
-
-  /* =========================================
-     AFFICHER LA LETTRE
-     ========================================= */
 
   function afficherLettre() {
 
