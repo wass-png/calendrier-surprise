@@ -27,7 +27,7 @@
 
     .card {
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       background: rgba(255, 255, 255, 0.9);
       border-radius: 30px;
       padding: 40px 25px;
@@ -63,7 +63,39 @@
       margin-top: 20px;
     }
 
+    /* STYLE DE LA LETTRE */
+
+    .lettre {
+      text-align: left;
+      line-height: 1.8;
+      font-size: 1.05em;
+    }
+
+    .lettre p {
+      margin-bottom: 18px;
+    }
+
+    /* BOUTON VIDEO */
+
+    .bouton-video {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 15px 25px;
+      background: #f5e6e8;
+      color: #3d3d3d;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .bouton-video:hover {
+      transform: scale(1.05);
+    }
+
   </style>
+
 </head>
 
 
@@ -82,135 +114,284 @@
 
 <script>
 
+
+  /* =========================================
+     LES SURPRISES
+     ========================================= */
+
+
   const surprises = {
+
+
+    /* 💌 8 SEPTEMBRE */
 
     "1": {
       date: "2026-09-08",
-      titre: "8 septembre <3",
+      titre: "Bon anniversaire Anna &lt;3",
+
       contenu: `
-        <p>Bon anniversaire Anna 💌</p>
-        <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+
+        <div class="lettre">
+
+          <p><strong>Ma chère Anna,</strong></p>
+
+          <p>
+            Voici déjà 20 ans que tu es née et que tu es une vraie nécessité au sein de ton entourage.
+          </p>
+
+          <p>
+            D’aussi loin que je me souvienne, je t’ai toujours admirée pour tes capacités à être stylée malgré toi et ta manière de semer de la joie partout où tu passes.
+          </p>
+
+          <p>
+            La plupart du temps je fais des blagues, mais je crois, en 8 ans d’amitié, ne jamais avoir pu te confier sincèrement ce que je ressens à ton égard. Pardonne les fautes et la potentielle gêne que tu pourras ressentir.
+          </p>
+
+          <p>
+            Je pense que le problème, c’est que j’ai du mal à dire aux gens qu’ils comptent pour moi. Pourtant, après autant de temps, je pense que tu mérites de lire mes propres mots.
+          </p>
+
+          <p>
+            Tu fais partie de ces amitiés que je ne pense jamais perdre. Il y a eu une période compliquée pour moi où j’étais éloignée de vous toutes, mais pourtant je n’ai jamais douté que notre relation ne se rallumerait pas.
+          </p>
+
+          <p>
+            De toutes mes amies, tu es sûrement celle qui m’intrigue le plus. Même si je te connais, j’ai l’impression de découvrir une partie de toi chaque jour et c’est ce qui me plaît vraiment.
+          </p>
+
+          <p>
+            On a créé plein de souvenirs pendant nos années collège, mais pas assez pendant les années lycée et ça me rend vraiment triste.
+          </p>
+
+          <p>
+            Je sais que ça peut paraître bizarre, mais je pense souvent à l’époque où on était vraiment « inséparables » et ça me fait de la peine parfois.
+          </p>
+
+          <p>
+            En fait, je sais que c’est entièrement de ma faute si on s’est moins parlées pendant le lycée parce que j’avais honte de revenir après que vous ayez toutes continué votre chemin sans moi.
+          </p>
+
+          <p>
+            C’est, je pense, la raison principale pour laquelle je n’ai pas aimé le lycée.
+          </p>
+
+          <p>
+            Maintenant que je suis redevenue proche de toi, c’est toujours avec une réelle impatience que j’ouvre tes messages, regarde tes stories et surtout que je passe du temps avec toi.
+          </p>
+
+          <p>
+            J’espère qu’un jour j’arriverai à rattraper le temps perdu mais, en tout cas, pour l’instant je suis très contente que tu sois une de mes meilleures amies.
+          </p>
+
+          <p>
+            Tu es de ces rencontres qui marquent des vies inconsciemment.
+          </p>
+
+
+          <br>
+
+
+          <p>Merci pour tous les rires,</p>
+
+          <p>Merci pour tous les pleurs,</p>
+
+          <p>Merci pour les angoisses,</p>
+
+          <p>Merci pour les joies.</p>
+
+
+          <br>
+
+
+          <p>
+            Tous les jours je prie Dieu pour qu’on soit amies pour la vie.
+          </p>
+
+          <p><strong>Je t’aime &lt;3</strong></p>
+
+          <p><strong>Wassila</strong></p>
+
+
+          <br>
+
+
+          <!-- TU REMPLACERAS TON_LIEN_VIDEO PLUS TARD -->
+
+          <a
+            class="bouton-video"
+            href="https://drive.google.com/file/d/1RWvpjJ4u3YK63R0gQSoth3yhDvuxr8cT/view?usp=share_link"
+            target="_blank"
+          >
+            🧃 Regarder la vidéo
+          </a>
+
+        </div>
+
       `
     },
 
+
+    /* 🍓 3 OCTOBRE */
 
     "2": {
       date: "2026-10-03",
       titre: "3 octobre 🍓",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🐚 28 NOVEMBRE */
 
     "3": {
       date: "2026-11-28",
       titre: "28 novembre 🐚",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🎄 25 DECEMBRE */
 
     "4": {
       date: "2026-12-25",
       titre: "25 décembre 🪷",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🧃 1 JANVIER */
 
     "5": {
       date: "2027-01-01",
       titre: "1 janvier 🧃",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🙊 26 FEVRIER */
 
     "6": {
       date: "2027-02-26",
       titre: "26 février 🙊",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🍓 4 MARS */
 
     "7": {
       date: "2027-03-04",
       titre: "4 mars 🍓",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🪷 17 AVRIL */
 
     "8": {
       date: "2027-04-17",
       titre: "17 avril 🪷",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🐻 12 MAI */
 
     "9": {
       date: "2027-05-12",
       titre: "12 mai 🐻",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🧃 29 JUIN */
 
     "10": {
       date: "2027-06-29",
       titre: "29 juin 🧃",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🐚 8 JUILLET */
 
     "11": {
       date: "2027-07-08",
       titre: "8 juillet 🐚",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
+
+    /* 🍓 13 AOUT */
 
     "12": {
       date: "2027-08-13",
       titre: "13 août 🍓",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 💌</p>
       `
     },
 
 
+    /* 💌 2 OCTOBRE */
+
     "13": {
       date: "2026-10-02",
       titre: "2 octobre 💌",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
       `
     },
 
 
+    /* 🍓 10 AVRIL */
+
     "14": {
       date: "2027-04-10",
       titre: "10 avril 🍓",
+
       contenu: `
         <p>Ta surprise sera ajoutée ici plus tard 🪷</p>
       `
     }
 
   };
+
+
+  /* =========================================
+     RECUPERATION DU NUMERO DU QR CODE
+     ========================================= */
 
 
   const params = new URLSearchParams(window.location.search);
@@ -220,6 +401,11 @@
   const app = document.getElementById("app");
 
   const symbol = document.getElementById("symbol");
+
+
+  /* =========================================
+     PAGE D'ACCUEIL
+     ========================================= */
 
 
   if (!numero || !surprises[numero]) {
@@ -244,6 +430,11 @@
   }
 
 
+  /* =========================================
+     PAGE D'UNE SURPRISE
+     ========================================= */
+
+
   else {
 
     const surprise = surprises[numero];
@@ -262,6 +453,11 @@
     };
 
 
+    /* =========================================
+       SURPRISE VERROUILLEE
+       ========================================= */
+
+
     if (maintenant < dateOuverture) {
 
       symbol.textContent = "🙊";
@@ -278,8 +474,10 @@
           </p>
 
           <p class="date">
+
             Disponible le
             ${dateOuverture.toLocaleDateString("fr-FR", options)}
+
           </p>
 
           <p>
@@ -291,6 +489,11 @@
       `;
 
     }
+
+
+    /* =========================================
+       SURPRISE DEVERROUILLEE
+       ========================================= */
 
 
     else {
