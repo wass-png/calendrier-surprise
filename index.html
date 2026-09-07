@@ -96,6 +96,23 @@
       margin-top: 30px;
     }
 
+    .code-input {
+      width: 100%;
+      max-width: 250px;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 1.2em;
+      letter-spacing: 5px;
+    }
+
+    .erreur {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
     img,
     video {
       max-width: 100%;
@@ -118,6 +135,17 @@
   </main>
 
 <script>
+
+  /* =========================================
+     CODE SECRET DU MOT
+     ========================================= */
+
+  const codeSecret = "8273";
+
+
+  /* =========================================
+     LES SURPRISES
+     ========================================= */
 
   const surprises = {
 
@@ -186,8 +214,11 @@
           <br>
 
           <p>Merci pour tous les rires,</p>
+
           <p>Merci pour tous les pleurs,</p>
+
           <p>Merci pour les angoisses,</p>
+
           <p>Merci pour les joies.</p>
 
           <br>
@@ -196,7 +227,7 @@
             Tous les jours je prie Dieu pour qu’on soit amies pour la vie.
           </p>
 
-          <p><strong>Je t’aime 
+          <p><strong>Je t’aime
 
           <p><strong>Wassila</strong></p>
 
@@ -285,6 +316,10 @@
   };
 
 
+  /* =========================================
+     RECUPERATION DU QR CODE
+     ========================================= */
+
   const params = new URLSearchParams(window.location.search);
   const numero = params.get("surprise");
 
@@ -292,7 +327,9 @@
   const symbol = document.getElementById("symbol");
 
 
-  /* PAGE D'ACCUEIL GENERALE */
+  /* =========================================
+     PAGE D'ACCUEIL
+     ========================================= */
 
   if (!numero || !surprises[numero]) {
 
@@ -310,7 +347,9 @@
   }
 
 
-  /* SURPRISE */
+  /* =========================================
+     SURPRISE
+     ========================================= */
 
   else {
 
@@ -330,6 +369,7 @@
       symbol.textContent = "🙊";
 
       app.innerHTML = `
+
         <div class="locked">
 
           <h2>Pas encore 🙊</h2>
@@ -345,43 +385,22 @@
           </p>
 
         </div>
+
       `;
 
     }
 
 
-    /* SURPRISE 8 SEPTEMBRE : PAGE SPECIALE */
+    /* SURPRISE DU 8 SEPTEMBRE */
 
     else if (numero === "1") {
 
-      symbol.textContent = "💌";
-
-      app.innerHTML = `
-
-        <h2>Joyeux anniversaire Anna &lt;3</h2>
-
-        <div class="boutons">
-
-          <button class="bouton" onclick="afficherLettre()">
-            💌 Lire ton mot
-          </button>
-
-          <a
-            class="bouton"
-            href="TON_LIEN_VIDEO"
-            target="_blank"
-          >
-            🧃 Regarder la vidéo
-          </a>
-
-        </div>
-
-      `;
+      afficherPageAnniversaire();
 
     }
 
 
-    /* TOUTES LES AUTRES SURPRISES */
+    /* AUTRES SURPRISES */
 
     else {
 
@@ -404,7 +423,119 @@
   }
 
 
-  /* AFFICHER LA LETTRE DU 8 SEPTEMBRE */
+  /* =========================================
+     PAGE ANNIVERSAIRE
+     ========================================= */
+
+  function afficherPageAnniversaire() {
+
+    symbol.textContent = "💌";
+
+    app.innerHTML = `
+
+      <h2>Joyeux anniversaire Anna &lt;3</h2>
+
+      <div class="boutons">
+
+        <button
+          class="bouton"
+          onclick="demanderCode()"
+        >
+          💌 Lire ton mot
+        </button>
+
+        <a
+          class="bouton"
+          href="TON_LIEN_VIDEO"
+          target="_blank"
+        >
+          🧃 Regarder la vidéo
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================
+     DEMANDER LE CODE SECRET
+     ========================================= */
+
+  function demanderCode() {
+
+    app.innerHTML = `
+
+      <h2>Un petit secret 💌</h2>
+
+      <p>
+        Entre le code pour découvrir ton mot.
+      </p>
+
+      <input
+        type="password"
+        id="code"
+        class="code-input"
+        placeholder="••••"
+        maxlength="4"
+      >
+
+      <br>
+
+      <button
+        class="bouton"
+        style="margin-top:20px"
+        onclick="verifierCode()"
+      >
+        Débloquer 💌
+      </button>
+
+      <p id="erreur" class="erreur"></p>
+
+      <div class="retour">
+        <button
+          class="bouton"
+          onclick="afficherPageAnniversaire()"
+        >
+          ← Retour
+        </button>
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================
+     VERIFIER LE CODE
+     ========================================= */
+
+  function verifierCode() {
+
+    const codeEntre =
+      document.getElementById("code").value;
+
+
+    if (codeEntre === codeSecret) {
+
+      afficherLettre();
+
+    }
+
+    else {
+
+      document.getElementById("erreur").textContent =
+        "Ce n'est pas le bon code 🙊";
+
+    }
+
+  }
+
+
+  /* =========================================
+     AFFICHER LA LETTRE
+     ========================================= */
 
   function afficherLettre() {
 
@@ -418,38 +549,12 @@
 
       <div class="retour">
 
-        <button class="bouton" onclick="retourAnniversaire()">
+        <button
+          class="bouton"
+          onclick="afficherPageAnniversaire()"
+        >
           ← Retour
         </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* RETOUR A LA PAGE D'ANNIVERSAIRE */
-
-  function retourAnniversaire() {
-
-    app.innerHTML = `
-
-      <h2>Joyeux anniversaire Anna &lt;3</h2>
-
-      <div class="boutons">
-
-        <button class="bouton" onclick="afficherLettre()">
-          💌 Lire ton mot
-        </button>
-
-        <a
-          class="bouton"
-          href="https://drive.google.com/file/d/1RWvpjJ4u3YK63R0gQSoth3yhDvuxr8cT/view?usp=sharing"
-          target="_blank"
-        >
-          🧃 Regarder la vidéo
-        </a>
 
       </div>
 
