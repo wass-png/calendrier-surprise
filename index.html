@@ -198,6 +198,55 @@
     transition: width 0.8s ease;
   }
 
+  /* RÉSULTAT FINAL */
+
+  .grand-resultat {
+    margin-top: 25px;
+  }
+
+  .grand-resultat h2 {
+    margin-bottom: 10px;
+  }
+
+  .photo-gagnante {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 6px 20px rgba(150, 100, 120, 0.18);
+  }
+
+  .message-personnalise {
+    background: #fff4f8;
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin: 20px 0 30px;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .egalite {
+    margin-top: 15px;
+  }
+
+  .photos-egalite {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+
+  .photo-egalite {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(150, 100, 120, 0.15);
+  }
+
   @media (max-width: 600px) {
     .container {
       padding: 35px 20px;
@@ -217,6 +266,11 @@
 
     .quiz-question {
       font-size: 19px;
+    }
+
+    .photo-gagnante {
+      width: 200px;
+      height: 200px;
     }
   }
 </style>
@@ -418,29 +472,29 @@ const surprises = {
 const questionsQuiz = [
   "Qui est la plus susceptible de devenir célèbre ?",
   "Qui est la plus susceptible de partir vivre à l’étranger ?",
-  "Qui est la plus susceptible de se marier en premier ?",
+  "Avec qui tu partirais en vacances sur un coup de tête ?",
   "Qui est la plus susceptible de devenir riche ?",
-  "Qui est la plus susceptible de tout plaquer du jour au lendemain ?",
+  "Qui est la plus aigrie ?",
   "Qui est la plus susceptible d’arriver en retard à son propre mariage ?",
   "Qui est la plus susceptible de répondre trois jours après à un message ?",
-  "Qui est la plus susceptible de faire une dépense complètement inutile ?",
-  "Qui est la plus susceptible de réserver un voyage sur un coup de tête ?",
+  "Qui est la plus susceptible de dire « je m’en fous » alors qu’elle s’en fout absolument pas ?",
+  "Avec qui tu irais à un concert ?",
   "Qui est la plus susceptible de se perdre même avec Google Maps ?",
+  "Qui est la plus gênante ?",
   "Qui est la plus susceptible de rire dans un moment où il ne faut absolument pas rire ?",
-  "Qui est la plus susceptible de faire une nuit blanche juste pour finir une série ?",
   "Qui est la plus susceptible de devenir influenceuse ?",
   "Qui est la plus susceptible de participer à une émission de télé-réalité ?",
   "Qui est la plus susceptible de devenir accro à une nouvelle passion pendant deux semaines puis de complètement l’abandonner ?",
-  "Qui est la plus susceptible de devenir amie avec quelqu’un en une seule soirée ?",
+  "Avec qui tu pourrais parler pendant 8 heures sans voir le temps passer ?",
   "Qui est la plus susceptible de tomber amoureuse d’un personnage fictif ?",
   "Qui est la plus susceptible de faire semblant d’avoir compris alors qu’elle n’a absolument rien compris ?",
   "Qui est la plus susceptible de dire « j’arrive » alors qu’elle n’est même pas encore prête ?",
   "Qui est la plus susceptible de faire rire tout le groupe sans même essayer ?",
-  "Qui est la plus susceptible de proposer « juste une petite sortie » et de finir dehors jusqu’à 3 h du matin ?",
+  "Avec qui tu ferais le plus facilement un voyage improvisé ?",
   "Qui est la plus susceptible de garder un secret pendant 10 ans ?",
-  "Qui est la plus susceptible de dire « je ne vais absolument pas faire ça » et de finir par le faire quand même ?",
+  "Avec qui tu échangerais ta vie pendant une journée ?",
   "Qui est la plus susceptible de partir en vacances avec une valise beaucoup trop remplie ?",
-  "Qui est la plus susceptible de se retrouver dans une situation tellement improbable que personne ne la croirait ?"
+  "Qui est la plus susceptible de faire une énorme gaffe devant la mauvaise personne ?"
 ];
 
 
@@ -452,6 +506,26 @@ const participantesQuiz = [
   "Hajar",
   "Wassila"
 ];
+
+
+const motsPersonnalises = {
+  "Enora": "ah ouais tu m’aimes a ce point hein 😏",
+  "Anna": "bro est fan d'elle même",
+  "Clélia": "Article 222-33-2-2 du Code pénal : « Le fait de harceler une personne par des propos ou comportements répétés ayant pour objet ou pour effet une dégradation de ses conditions de vie se traduisant par une altération de sa santé physique ou mentale est puni d'un an d'emprisonnement et de 15 000 € d'amende lorsque ces faits ont causé une incapacité totale de travail inférieure ou égale à huit jours ou n'ont entraîné aucune incapacité de travail. »",
+  "Maïssa": "bah alors pepette ??? on va avoir des comptes à régler toi et moi",
+  "Hajar": "je sais pas si je suis honorée ou pas",
+  "Wassila": "ah ouais tt ça je pense que tu me kiffe en secret"
+};
+
+
+const photosPersonnes = {
+  "Enora": "enora.jpg",
+  "Anna": "anna.jpg",
+  "Clélia": "clelia.jpg",
+  "Maïssa": "maissa.jpg",
+  "Hajar": "hajar.jpg",
+  "Wassila": "wassila.jpg"
+};
 
 
 let questionActuelle = 0;
@@ -766,17 +840,110 @@ function afficherResultats() {
   const maximum =
     Math.max(...Object.values(votesQuiz));
 
+  const personnesGagnantes =
+    participantesQuiz.filter(
+      personne => votesQuiz[personne] === maximum
+    );
+
+
   let html = `
 
-    <div class="surprise">
+    <div class="surprise grand-resultat">
 
-      <h2>Les résultats 💌</h2>
+  `;
+
+
+  if (personnesGagnantes.length === 1) {
+
+    const gagnante = personnesGagnantes[0];
+
+    html += `
+
+      <h2>
+        C’est ${gagnante} qui a le plus été choisie !
+      </h2>
 
       <p>
-        Voilà ce que donnent tes réponses !
+        Elle a été choisie ${maximum} fois.
       </p>
 
+      <img
+        class="photo-gagnante"
+        src="${photosPersonnes[gagnante]}"
+        alt="Photo de ${gagnante}"
+      >
+
+      <div class="message-personnalise">
+        ${motsPersonnalises[gagnante]}
+      </div>
+
+    `;
+
+  } else {
+
+    html += `
+
+      <h2>
+        Égalité ! 👀
+      </h2>
+
+      <p>
+        Elles ont toutes les deux été choisies ${maximum} fois.
+      </p>
+
+      <div class="photos-egalite">
+    `;
+
+
+    personnesGagnantes.forEach(personne => {
+
+      html += `
+
+        <div>
+          <img
+            class="photo-egalite"
+            src="${photosPersonnes[personne]}"
+            alt="Photo de ${personne}"
+          >
+
+          <p>
+            <strong>${personne}</strong>
+          </p>
+        </div>
+
+      `;
+
+    });
+
+
+    html += `
+      </div>
+    `;
+
+
+    personnesGagnantes.forEach(personne => {
+
+      html += `
+
+        <div class="message-personnalise">
+          <strong>${personne}</strong><br><br>
+          ${motsPersonnalises[personne]}
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  html += `
+
       <div class="resultats">
+
+        <h2 style="font-size:21px;">
+          Tous les résultats 💌
+        </h2>
   `;
 
 
