@@ -1,518 +1,523 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendrier surprise 💌</title>
 
-  <title>Calendrier Surprise &lt;3</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #fff8fb;
+    font-family: Georgia, serif;
+    color: #5f4b52;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+  }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f5e6e8, #e8edf5);
-      color: #3d3d3d;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+  .container {
+    width: 100%;
+    max-width: 650px;
+    background: white;
+    padding: 45px 30px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(150, 100, 120, 0.12);
+    text-align: center;
+  }
 
-    .card {
-      width: 100%;
-      max-width: 650px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 30px;
-      padding: 40px 25px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  h1, h2 {
+    color: #8c6574;
+    font-weight: normal;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  p {
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  .symbol {
+    font-size: 45px;
+    margin-bottom: 15px;
+  }
+
+  .date {
+    margin-top: 25px;
+    color: #a77c8d;
+    font-size: 15px;
+  }
+
+  .locked {
+    padding: 20px 0;
+  }
+
+  .surprise {
+    padding: 10px;
+  }
+
+  .lettre {
+    text-align: left;
+    margin-top: 25px;
+  }
+
+  .lettre p {
+    margin-bottom: 18px;
+  }
+
+  .boutons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .bouton {
+    display: inline-block;
+    border: none;
+    background: #efd9e2;
+    color: #654d56;
+    padding: 13px 22px;
+    border-radius: 30px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .bouton:hover {
+    background: #e6c8d4;
+    transform: translateY(-1px);
+  }
+
+  .code-input {
+    width: 140px;
+    padding: 12px;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 8px;
+    border: 1px solid #decbd3;
+    border-radius: 12px;
+    outline: none;
+  }
+
+  .erreur {
+    color: #b36b7f;
+    margin-top: 15px;
+  }
+
+  .retour {
+    margin-top: 30px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 35px 20px;
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 2.2em;
+      font-size: 28px;
     }
 
-    .symbol {
-      font-size: 3.5em;
-      margin: 20px 0;
+    h2 {
+      font-size: 23px;
     }
 
-    .locked,
-    .surprise {
-      line-height: 1.6;
-      font-size: 1.1em;
+    p {
+      font-size: 16px;
     }
-
-    .date {
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    .lettre {
-      text-align: left;
-      line-height: 1.8;
-      font-size: 1.05em;
-    }
-
-    .lettre p {
-      margin-bottom: 18px;
-    }
-
-    .boutons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-top: 30px;
-      align-items: center;
-    }
-
-    .bouton {
-      display: inline-block;
-      width: 100%;
-      max-width: 320px;
-      padding: 16px 25px;
-      background: #f5e6e8;
-      color: #3d3d3d;
-      text-decoration: none;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.1em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .bouton:hover {
-      transform: scale(1.03);
-    }
-
-    .retour {
-      margin-top: 30px;
-    }
-
-    .code-input {
-      width: 100%;
-      max-width: 250px;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 20px;
-      border: 1px solid #ddd;
-      text-align: center;
-      font-size: 1.2em;
-      letter-spacing: 5px;
-    }
-
-    .erreur {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    img,
-    video {
-      max-width: 100%;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
 
-  <main class="card">
-
-    <h1>Calendrier Surprise &lt;3</h1>
-
-    <div class="symbol" id="symbol">🐚</div>
-
-    <div id="app"></div>
-
-  </main>
+<div class="container">
+  <div id="symbol" class="symbol">🐚</div>
+  <div id="app"></div>
+</div>
 
 <script>
 
-  const codeSecret = "8273";
+const codeSecret = "8273";
+
+const surprises = {
+
+  "1": {
+    date: "2026-09-08",
+    titre: "Joyeux anniversaire Anna <3",
+    contenu: `
+      <div class="lettre">
+        <p><strong>Ma chère Anna,</strong></p>
+
+        <p>Voici déjà 20 ans que tu es née et que tu es une vraie nécessité au sein de ton entourage.</p>
+
+        <p>D’aussi loin que je me souvienne, je t’ai toujours admirée pour tes capacités à être stylée malgré toi et ta manière de semer de la joie partout où tu passes.</p>
+
+        <p>La plupart du temps je fais des blagues, mais je crois, en 8 ans d’amitié, ne jamais avoir pu te confier sincèrement ce que je ressens à ton égard. Pardonne les fautes et la potentielle gêne que tu pourras ressentir.</p>
+
+        <p>Je pense que le problème, c’est que j’ai du mal à dire aux gens qu’ils comptent pour moi. Pourtant, après autant de temps, je pense que tu mérites de lire mes propres mots.</p>
+
+        <p>Tu fais partie de ces amitiés que je ne pense jamais perdre. Il y a eu une période compliquée pour moi où j’étais éloignée de vous toutes, mais pourtant je n’ai jamais douté que notre relation ne se rallumerait pas.</p>
+
+        <p>De toutes mes amies, tu es sûrement celle qui m’intrigue le plus. Même si je te connais, j’ai l’impression de découvrir une partie de toi chaque jour et c’est ce qui me plaît vraiment.</p>
+
+        <p>On a créé plein de souvenirs pendant nos années collège, mais pas assez pendant les années lycée et ça me rend vraiment triste.</p>
+
+        <p>Je sais que ça peut paraître bizarre, mais je pense souvent à l’époque où on était vraiment « inséparables » et ça me fait de la peine parfois.</p>
+
+        <p>En fait, je sais que c’est entièrement de ma faute si on s’est moins parlées pendant le lycée parce que j’avais honte de revenir après que vous ayez toutes continué votre chemin sans moi.</p>
+
+        <p>C’est, je pense, la raison principale pour laquelle je n’ai pas aimé le lycée.</p>
+
+        <p>Maintenant que je suis redevenue proche de toi, c’est toujours avec une réelle impatience que j’ouvre tes messages, regarde tes stories et surtout que je passe du temps avec toi.</p>
+
+        <p>J’espère qu’un jour j’arriverai à rattraper le temps perdu mais, en tout cas, pour l’instant je suis très contente que tu sois une de mes meilleures amies.</p>
+
+        <p>Tu es de ces rencontres qui marquent des vies inconsciemment.</p>
+
+        <br>
+
+        <p>Merci pour tous les rires,</p>
+        <p>Merci pour tous les pleurs,</p>
+        <p>Merci pour les angoisses,</p>
+        <p>Merci pour les joies.</p>
+
+        <br>
+
+        <p>Tous les jours je prie Dieu pour qu’on soit amies pour la vie.</p>
+
+        <p><strong>Je t’aime &lt;3</strong></p>
+
+        <p><strong>Wassila</strong></p>
+      </div>
+    `
+  },
+
+  "2": {
+    date: "2026-10-03",
+    titre: "3 octobre 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "3": {
+    date: "2026-11-28",
+    titre: "28 novembre 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "4": {
+    date: "2026-12-25",
+    titre: "25 décembre 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "5": {
+    date: "2027-01-01",
+    titre: "1er janvier 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "6": {
+    date: "2027-02-26",
+    titre: "26 février 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "7": {
+    date: "2027-03-04",
+    titre: "4 mars 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "8": {
+    date: "2027-04-17",
+    titre: "17 avril 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "9": {
+    date: "2027-05-12",
+    titre: "12 mai 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "10": {
+    date: "2027-06-29",
+    titre: "29 juin 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "11": {
+    date: "2027-07-08",
+    titre: "8 juillet 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "12": {
+    date: "2027-08-13",
+    titre: "13 août 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  },
+
+  "13": {
+    date: "2026-10-02",
+    titre: "2 octobre 💌",
+    contenu: `
+      <p>Petit souvenir du 2 octobre haha. Ça va beaucoup mieux !</p>
+
+      <a
+        class="bouton"
+        href="https://drive.google.com/file/d/1lVnJ1Zw6KlKqDn297WQBJ1cjkdOQqCl0/view?usp=drivesdk"
+        target="_blank"
+      >
+        🧃 Regarder la vidéo
+      </a>
+    `
+  },
+
+  "14": {
+    date: "2027-04-10",
+    titre: "10 avril 💌",
+    contenu: `
+      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+    `
+  }
+
+};
 
 
-  const surprises = {
-
-    "1": {
-      date: "2026-09-08",
-      titre: "Joyeux anniversaire Anna &lt;3",
-
-      contenu: `
-        <div class="lettre">
-
-          <p><strong>Ma chère Anna,</strong></p>
-
-          <p>
-            Voici déjà 20 ans que tu es née et que tu es une vraie nécessité au sein de ton entourage.
-          </p>
-
-          <p>
-            D’aussi loin que je me souvienne, je t’ai toujours admirée pour tes capacités à être stylée malgré toi et ta manière de semer de la joie partout où tu passes.
-          </p>
-
-          <p>
-            La plupart du temps je fais des blagues, mais je crois, en 8 ans d’amitié, ne jamais avoir pu te confier sincèrement ce que je ressens à ton égard. Pardonne les fautes et la potentielle gêne que tu pourras ressentir.
-          </p>
-
-          <p>
-            Je pense que le problème, c’est que j’ai du mal à dire aux gens qu’ils comptent pour moi. Pourtant, après autant de temps, je pense que tu mérites de lire mes propres mots.
-          </p>
-
-          <p>
-            Tu fais partie de ces amitiés que je ne pense jamais perdre. Il y a eu une période compliquée pour moi où j’étais éloignée de vous toutes, mais pourtant je n’ai jamais douté que notre relation ne se rallumerait pas.
-          </p>
-
-          <p>
-            De toutes mes amies, tu es sûrement celle qui m’intrigue le plus. Même si je te connais, j’ai l’impression de découvrir une partie de toi chaque jour et c’est ce qui me plaît vraiment.
-          </p>
-
-          <p>
-            On a créé plein de souvenirs pendant nos années collège, mais pas assez pendant les années lycée et ça me rend vraiment triste.
-          </p>
-
-          <p>
-            Je sais que ça peut paraître bizarre, mais je pense souvent à l’époque où on était vraiment « inséparables » et ça me fait de la peine parfois.
-          </p>
-
-          <p>
-            En fait, je sais que c’est entièrement de ma faute si on s’est moins parlées pendant le lycée parce que j’avais honte de revenir après que vous ayez toutes continué votre chemin sans moi.
-          </p>
-
-          <p>
-            C’est, je pense, la raison principale pour laquelle je n’ai pas aimé le lycée.
-          </p>
-
-          <p>
-            Maintenant que je suis redevenue proche de toi, c’est toujours avec une réelle impatience que j’ouvre tes messages, regarde tes stories et surtout que je passe du temps avec toi.
-          </p>
-
-          <p>
-            J’espère qu’un jour j’arriverai à rattraper le temps perdu mais, en tout cas, pour l’instant je suis très contente que tu sois une de mes meilleures amies.
-          </p>
-
-          <p>
-            Tu es de ces rencontres qui marquent des vies inconsciemment.
-          </p>
-
-          <br>
-
-          <p>Merci pour tous les rires,</p>
-          <p>Merci pour tous les pleurs,</p>
-          <p>Merci pour les angoisses,</p>
-          <p>Merci pour les joies.</p>
-
-          <br>
-
-          <p>
-            Tous les jours je prie Dieu pour qu’on soit amies pour la vie.
-          </p>
-
-          <p><strong>Je t’aime &lt;3</strong></p>
-
-          <p><strong>Wassila</strong></p>
-
-        </div>
-      `
-    },
-
-    "2": {
-      date: "2026-10-03",
-      titre: "3 octobre 🍓",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "3": {
-      date: "2026-11-28",
-      titre: "28 novembre 🐚",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "4": {
-      date: "2026-12-25",
-      titre: "25 décembre 🪷",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "5": {
-      date: "2027-01-01",
-      titre: "1 janvier 🧃",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "6": {
-      date: "2027-02-26",
-      titre: "26 février 🙊",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "7": {
-      date: "2027-03-04",
-      titre: "4 mars 🍓",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "8": {
-      date: "2027-04-17",
-      titre: "17 avril 🪷",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "9": {
-      date: "2027-05-12",
-      titre: "12 mai 🐻",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "10": {
-      date: "2027-06-29",
-      titre: "29 juin 🧃",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "11": {
-      date: "2027-07-08",
-      titre: "8 juillet 🐚",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "12": {
-      date: "2027-08-13",
-      titre: "13 août 🍓",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 💌</p>`
-    },
-
-    "13": {
-      date: "2026-10-02",
-      titre: "2 octobre 💌",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 🐚</p>`
-    },
-
-    "14": {
-      date: "2027-04-10",
-      titre: "10 avril 🍓",
-      contenu: `<p>Ta surprise sera ajoutée ici plus tard 🪷</p>`
-    }
-
-  };
+const params = new URLSearchParams(window.location.search);
+const numero = params.get("surprise");
+const app = document.getElementById("app");
+const symbol = document.getElementById("symbol");
 
 
-  const params = new URLSearchParams(window.location.search);
-  const numero = params.get("surprise");
+if (!numero || !surprises[numero]) {
 
-  const app = document.getElementById("app");
-  const symbol = document.getElementById("symbol");
+  symbol.textContent = "🐚";
+
+  app.innerHTML = `
+    <h2>Bienvenue &lt;3</h2>
+    <p>Scanne un QR code de ton calendrier 💌</p>
+  `;
+
+} else {
+
+  const surprise = surprises[numero];
+
+  const dateOuverture = new Date(
+    surprise.date + "T00:00:00"
+  );
+
+  const maintenant = new Date();
 
 
-  if (!numero || !surprises[numero]) {
+  if (maintenant < dateOuverture) {
 
-    symbol.textContent = "🐚";
+    symbol.textContent = "🙊";
 
     app.innerHTML = `
-      <h2>Bienvenue &lt;3</h2>
+      <div class="locked">
 
-      <p>
-        Scanne un QR code de ton calendrier
-        pour découvrir une petite surprise 💌
-      </p>
+        <h2>Pas encore 🙊</h2>
+
+        <p>
+          Il faudra attendre le bon jour pour découvrir cette surprise 💌
+        </p>
+
+        <p class="date">
+          Disponible le
+          ${dateOuverture.toLocaleDateString("fr-FR")}
+        </p>
+
+      </div>
     `;
-
-  } else {
-
-    const surprise = surprises[numero];
-
-    const dateOuverture = new Date(
-      surprise.date + "T00:00:00"
-    );
-
-    const maintenant = new Date();
-
-
-    if (maintenant < dateOuverture) {
-
-      symbol.textContent = "🙊";
-
-      app.innerHTML = `
-
-        <div class="locked">
-
-          <h2>Pas encore 🙊</h2>
-
-          <p>
-            Il faudra attendre le bon jour
-            pour découvrir cette surprise 💌
-          </p>
-
-          <p class="date">
-            Disponible le
-            ${dateOuverture.toLocaleDateString("fr-FR")}
-          </p>
-
-        </div>
-
-      `;
-
-    }
-
-
-    else if (numero === "1") {
-
-      afficherPageAnniversaire();
-
-    }
-
-
-    else {
-
-      symbol.textContent = "💌";
-
-      app.innerHTML = `
-
-        <div class="surprise">
-
-          <h2>${surprise.titre}</h2>
-
-          ${surprise.contenu}
-
-        </div>
-
-      `;
-
-    }
 
   }
 
+  else if (numero === "1") {
 
-  function afficherPageAnniversaire() {
+    afficherPageAnniversaire();
+
+  }
+
+  else {
 
     symbol.textContent = "💌";
 
     app.innerHTML = `
+      <div class="surprise">
 
-      <h2>Joyeux anniversaire Anna &lt;3</h2>
+        <h2>${surprise.titre}</h2>
 
-      <div class="boutons">
-
-        <button
-          class="bouton"
-          onclick="demanderCode()"
-        >
-          💌 Lire ton mot
-        </button>
-
-
-        <a
-          class="bouton"
-          href="https://drive.google.com/file/d/1RWvpjJ4u3YK63R0gQSoth3yhDvuxr8cT/view?usp=sharing"
-          target="_blank"
-        >
-          🧃 Regarder la vidéo
-        </a>
+        ${surprise.contenu}
 
       </div>
-
     `;
-
   }
+}
 
 
-  function demanderCode() {
 
-    app.innerHTML = `
+function afficherPageAnniversaire() {
 
-      <h2>Un petit secret 💌</h2>
+  symbol.textContent = "💌";
 
-      <p>
-        Entre le code pour découvrir ton mot.
-      </p>
+  app.innerHTML = `
 
-      <input
-        type="password"
-        id="code"
-        class="code-input"
-        placeholder="••••"
-        maxlength="4"
+    <h2>Joyeux anniversaire Anna &lt;3</h2>
+
+    <div class="boutons">
+
+      <button class="bouton" onclick="demanderCode()">
+        💌 Lire ton mot
+      </button>
+
+      <a
+        class="bouton"
+        href="https://drive.google.com/file/d/1RWvpJj4u3YK63R0gQSoth3yhDvuxr8cT/view?usp=sharing"
+        target="_blank"
       >
+        🧃 Regarder la vidéo
+      </a>
 
-      <br>
+    </div>
+
+  `;
+}
+
+
+
+function demanderCode() {
+
+  app.innerHTML = `
+
+    <h2>Un petit secret 💌</h2>
+
+    <p>
+      Entre le code pour découvrir ton mot.
+    </p>
+
+    <input
+      type="password"
+      id="code"
+      class="code-input"
+      placeholder="••••"
+      maxlength="4"
+    >
+
+    <br>
+
+    <button
+      class="bouton"
+      style="margin-top:20px"
+      onclick="verifierCode()"
+    >
+      Débloquer 💌
+    </button>
+
+    <p id="erreur" class="erreur"></p>
+
+    <div class="retour">
 
       <button
         class="bouton"
-        style="margin-top:20px"
-        onclick="verifierCode()"
+        onclick="afficherPageAnniversaire()"
       >
-        Débloquer 💌
+        ← Retour
       </button>
 
-      <p id="erreur" class="erreur"></p>
+    </div>
 
-      <div class="retour">
-
-        <button
-          class="bouton"
-          onclick="afficherPageAnniversaire()"
-        >
-          ← Retour
-        </button>
-
-      </div>
-
-    `;
-
-  }
+  `;
+}
 
 
-  function verifierCode() {
 
-    const codeEntre =
-      document.getElementById("code").value;
+function verifierCode() {
 
+  const codeEntre =
+    document.getElementById("code").value;
 
-    if (codeEntre === codeSecret) {
+  if (codeEntre === codeSecret) {
 
-      afficherLettre();
+    afficherLettre();
 
-    } else {
+  } else {
 
-      document.getElementById("erreur").textContent =
-        "Ce n'est pas le bon code 🙊";
-
-    }
+    document.getElementById("erreur").textContent =
+      "Ce n'est pas le bon code 🙊";
 
   }
 
+}
 
-  function afficherLettre() {
 
-    symbol.textContent = "💌";
 
-    app.innerHTML = `
+function afficherLettre() {
 
-      <h2>Pour toi Anna 💌</h2>
+  symbol.textContent = "💌";
 
-      ${surprises["1"].contenu}
+  app.innerHTML = `
 
-      <div class="retour">
+    <h2>Pour toi Anna 💌</h2>
 
-        <button
-          class="bouton"
-          onclick="afficherPageAnniversaire()"
-        >
-          ← Retour
-        </button>
+    ${surprises["1"].contenu}
 
-      </div>
+    <div class="retour">
 
-    `;
+      <button
+        class="bouton"
+        onclick="afficherPageAnniversaire()"
+      >
+        ← Retour
+      </button>
 
-  }
+    </div>
+
+  `;
+
+}
 
 </script>
 
