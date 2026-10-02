@@ -127,6 +127,77 @@
     margin-top: 30px;
   }
 
+  /* JEU DU 3 OCTOBRE */
+
+  .quiz-question {
+    font-size: 21px;
+    line-height: 1.5;
+    color: #8c6574;
+    margin: 20px 0 25px;
+  }
+
+  .quiz-progress {
+    color: #a77c8d;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .quiz-choix {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 20px;
+  }
+
+  .choix-personne {
+    width: 100%;
+    border: none;
+    background: #f8e9ef;
+    color: #654d56;
+    padding: 13px 18px;
+    border-radius: 25px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .choix-personne:hover {
+    background: #efd9e2;
+    transform: translateY(-1px);
+  }
+
+  .resultats {
+    margin-top: 30px;
+    text-align: left;
+  }
+
+  .resultat-personne {
+    margin-bottom: 18px;
+  }
+
+  .resultat-nom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+
+  .barre-fond {
+    width: 100%;
+    height: 18px;
+    background: #f5e8ee;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .barre {
+    height: 100%;
+    background: #d98ca8;
+    border-radius: 20px;
+    transition: width 0.8s ease;
+  }
+
   @media (max-width: 600px) {
     .container {
       padding: 35px 20px;
@@ -142,6 +213,10 @@
 
     p {
       font-size: 16px;
+    }
+
+    .quiz-question {
+      font-size: 19px;
     }
   }
 </style>
@@ -215,7 +290,17 @@ const surprises = {
     date: "2026-10-03",
     titre: "3 octobre 💌",
     contenu: `
-      <p>Ta surprise sera ajoutée ici plus tard 🐚</p>
+      <p>
+        Aujourd’hui, petit jeu pour voir laquelle de nous six est la plus susceptible de faire certaines choses 👀
+      </p>
+
+      <p>
+        Choisis une personne à chaque question et découvre les résultats à la fin !
+      </p>
+
+      <button class="bouton" onclick="lancerQuiz()">
+        💌 Commencer le jeu
+      </button>
     `
   },
 
@@ -326,6 +411,66 @@ const surprises = {
 };
 
 
+/* =========================
+   QUESTIONS DU JEU
+========================= */
+
+const questionsQuiz = [
+  "Qui est la plus susceptible de devenir célèbre ?",
+  "Qui est la plus susceptible de partir vivre à l’étranger ?",
+  "Qui est la plus susceptible de se marier en premier ?",
+  "Qui est la plus susceptible de devenir riche ?",
+  "Qui est la plus susceptible de tout plaquer du jour au lendemain ?",
+  "Qui est la plus susceptible d’arriver en retard à son propre mariage ?",
+  "Qui est la plus susceptible de répondre trois jours après à un message ?",
+  "Qui est la plus susceptible de faire une dépense complètement inutile ?",
+  "Qui est la plus susceptible de réserver un voyage sur un coup de tête ?",
+  "Qui est la plus susceptible de se perdre même avec Google Maps ?",
+  "Qui est la plus susceptible de rire dans un moment où il ne faut absolument pas rire ?",
+  "Qui est la plus susceptible de faire une nuit blanche juste pour finir une série ?",
+  "Qui est la plus susceptible de devenir influenceuse ?",
+  "Qui est la plus susceptible de participer à une émission de télé-réalité ?",
+  "Qui est la plus susceptible de devenir accro à une nouvelle passion pendant deux semaines puis de complètement l’abandonner ?",
+  "Qui est la plus susceptible de devenir amie avec quelqu’un en une seule soirée ?",
+  "Qui est la plus susceptible de tomber amoureuse d’un personnage fictif ?",
+  "Qui est la plus susceptible de faire semblant d’avoir compris alors qu’elle n’a absolument rien compris ?",
+  "Qui est la plus susceptible de dire « j’arrive » alors qu’elle n’est même pas encore prête ?",
+  "Qui est la plus susceptible de faire rire tout le groupe sans même essayer ?",
+  "Qui est la plus susceptible de proposer « juste une petite sortie » et de finir dehors jusqu’à 3 h du matin ?",
+  "Qui est la plus susceptible de garder un secret pendant 10 ans ?",
+  "Qui est la plus susceptible de dire « je ne vais absolument pas faire ça » et de finir par le faire quand même ?",
+  "Qui est la plus susceptible de partir en vacances avec une valise beaucoup trop remplie ?",
+  "Qui est la plus susceptible de se retrouver dans une situation tellement improbable que personne ne la croirait ?"
+];
+
+
+const participantesQuiz = [
+  "Enora",
+  "Anna",
+  "Clélia",
+  "Maïssa",
+  "Hajar",
+  "Wassila"
+];
+
+
+let questionActuelle = 0;
+
+
+const votesQuiz = {
+  "Enora": 0,
+  "Anna": 0,
+  "Clélia": 0,
+  "Maïssa": 0,
+  "Hajar": 0,
+  "Wassila": 0
+};
+
+
+/* =========================
+   AFFICHAGE DU SITE
+========================= */
+
 const params = new URLSearchParams(window.location.search);
 const numero = params.get("surprise");
 const app = document.getElementById("app");
@@ -352,7 +497,16 @@ if (!numero || !surprises[numero]) {
   const maintenant = new Date();
 
 
-  if (maintenant < dateOuverture) {
+  /*
+    MODE TEST TEMPORAIRE :
+    La surprise n°2 est débloquée même avant le 3 octobre.
+  */
+
+  const surpriseEnModeTest =
+    numero === "2";
+
+
+  if (maintenant < dateOuverture && !surpriseEnModeTest) {
 
     symbol.textContent = "🙊";
 
@@ -398,6 +552,9 @@ if (!numero || !surprises[numero]) {
 }
 
 
+/* =========================
+   ANNIVERSAIRE
+========================= */
 
 function afficherPageAnniversaire() {
 
@@ -425,7 +582,6 @@ function afficherPageAnniversaire() {
 
   `;
 }
-
 
 
 function demanderCode() {
@@ -473,7 +629,6 @@ function demanderCode() {
 }
 
 
-
 function verifierCode() {
 
   const codeEntre =
@@ -491,7 +646,6 @@ function verifierCode() {
   }
 
 }
-
 
 
 function afficherLettre() {
@@ -517,6 +671,165 @@ function afficherLettre() {
 
   `;
 
+}
+
+
+/* =========================
+   JEU DU 3 OCTOBRE
+========================= */
+
+function lancerQuiz() {
+
+  questionActuelle = 0;
+
+  for (const personne in votesQuiz) {
+    votesQuiz[personne] = 0;
+  }
+
+  afficherQuestion();
+}
+
+
+function afficherQuestion() {
+
+  symbol.textContent = "🪷";
+
+  const question =
+    questionsQuiz[questionActuelle];
+
+  let html = `
+
+    <div class="surprise">
+
+      <div class="quiz-progress">
+        Question ${questionActuelle + 1} / ${questionsQuiz.length}
+      </div>
+
+      <div class="quiz-question">
+        ${question}
+      </div>
+
+      <div class="quiz-choix">
+  `;
+
+
+  participantesQuiz.forEach(personne => {
+
+    html += `
+      <button
+        class="choix-personne"
+        onclick="choisirPersonne('${personne}')"
+      >
+        ${personne}
+      </button>
+    `;
+
+  });
+
+
+  html += `
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  app.innerHTML = html;
+}
+
+
+function choisirPersonne(personne) {
+
+  votesQuiz[personne]++;
+
+  questionActuelle++;
+
+
+  if (questionActuelle >= questionsQuiz.length) {
+
+    afficherResultats();
+
+  } else {
+
+    afficherQuestion();
+
+  }
+}
+
+
+function afficherResultats() {
+
+  symbol.textContent = "🪷";
+
+  const maximum =
+    Math.max(...Object.values(votesQuiz));
+
+  let html = `
+
+    <div class="surprise">
+
+      <h2>Les résultats 💌</h2>
+
+      <p>
+        Voilà ce que donnent tes réponses !
+      </p>
+
+      <div class="resultats">
+  `;
+
+
+  participantesQuiz.forEach(personne => {
+
+    const votes =
+      votesQuiz[personne];
+
+    const largeur =
+      maximum === 0
+        ? 0
+        : (votes / maximum) * 100;
+
+
+    html += `
+
+      <div class="resultat-personne">
+
+        <div class="resultat-nom">
+          <span>${personne}</span>
+          <span>${votes}</span>
+        </div>
+
+        <div class="barre-fond">
+
+          <div
+            class="barre"
+            style="width: ${largeur}%"
+          ></div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  html += `
+
+      </div>
+
+      <p style="margin-top:35px;">
+        Merci d’avoir joué 🫶
+      </p>
+
+    </div>
+
+  `;
+
+
+  app.innerHTML = html;
 }
 
 </script>
